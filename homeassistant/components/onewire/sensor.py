@@ -98,6 +98,18 @@ DEVICE_SENSORS: dict[str, tuple[OneWireSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
     ),
+    "20": tuple(
+        OneWireSensorEntityDescription(
+            key=f"volt.{id}",
+            device_class=SensorDeviceClass.VOLTAGE,
+            entity_registry_enabled_default=True,
+            native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+            read_mode=READ_MODE_FLOAT,
+            state_class=SensorStateClass.MEASUREMENT,
+            translation_key=f"voltage_{id.lower()}",
+        )
+        for id in DEVICE_KEYS_A_D
+    ),
     "22": (SIMPLE_TEMPERATURE_SENSOR_DESCRIPTION,),
     "26": (
         SIMPLE_TEMPERATURE_SENSOR_DESCRIPTION,
